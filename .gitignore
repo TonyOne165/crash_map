@@ -1,0 +1,33 @@
+# Python
+venv/
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+dist/
+*.db
+.env
+
+# Node
+node_modules/
+build/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Modelos ML (pesados)
+*.pt
+
+# Binarios
+*.exe
+
+# Claude
+.claude/
+claude.exe
