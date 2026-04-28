@@ -89,7 +89,7 @@ const causas = [
   { nombre: 'Otros', valor: 13, color: '#3b82f6' },
 ];
 
-const MapaCalor = ({ token }) => {
+const MapaCalor = () => {
   const mapRef = useRef(null);
   const mapaRef = useRef(null);
   const heatLayerRef = useRef(null);
@@ -149,7 +149,7 @@ const MapaCalor = ({ token }) => {
       mapaRef.current.setView([lat, lng], 16);
       colocarMarkerSeleccion([lat, lng]);
     }
-  }, []);
+  }, [colocarMarkerSeleccion]);
 
   // ─── Temporary selection marker ────────────────────────────────────────────
   const colocarMarkerSeleccion = useCallback((latlng) => {

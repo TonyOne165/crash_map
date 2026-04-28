@@ -6,7 +6,6 @@ const API_BASE = process.env.REACT_APP_API_URL || 'http://localhost:8000';
 
 export default function PanelPublico() {
   const [stats, setStats]       = useState(null);
-  const [heatData, setHeatData] = useState([]);
   const [cargando, setCargando] = useState(true);
   const [error, setError]       = useState(null);
 
@@ -18,12 +17,10 @@ export default function PanelPublico() {
   useEffect(() => {
     async function cargar() {
       try {
-        const [resStats, resHeat] = await Promise.all([
+        const [resStats] = await Promise.all([
           fetch(`${API_BASE}/api/publico/estadisticas`).then(r => r.json()),
-          fetch(`${API_BASE}/api/publico/mapa-calor`).then(r => r.json()),
         ]);
         setStats(resStats);
-        setHeatData(Array.isArray(resHeat) ? resHeat : []);
       } catch (e) {
         setError('No se pudo conectar con el servidor. Verifica que el backend esté corriendo.');
       } finally {

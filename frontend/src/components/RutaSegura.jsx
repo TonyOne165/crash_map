@@ -28,7 +28,7 @@ const colorRiesgo = (nivel) => {
   return '#22c55e';
 };
 
-const RutaSegura = ({ token }) => {
+const RutaSegura = () => {
   // ─── Map refs ──────────────────────────────────────────────────────────────
   const mapRef = useRef(null);
   const mapaRef = useRef(null);
@@ -148,7 +148,7 @@ const RutaSegura = ({ token }) => {
       setSugerenciasDestino([]);
       colocarMarcadorPunto(punto, 'destino', nombre);
     }
-  }, []);
+  }, [colocarMarcadorPunto]);
 
   // ─── Marker helpers ────────────────────────────────────────────────────────
   const colocarMarcadorPunto = useCallback((punto, tipo, label) => {

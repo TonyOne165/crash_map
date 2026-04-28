@@ -62,15 +62,7 @@ function estadoBadge(estado) {
   }
 }
 
-function gravedadClass(g) {
-  const v = (g || '').toLowerCase();
-  if (v === 'fatal') return 'gravedad-fatal';
-  if (v === 'grave') return 'gravedad-grave';
-  return 'gravedad-leve';
-}
-
-// ═════════════════════════════════════════════════════════════════════════════
-export default function FuentesExternas({ usuario, token, toast }) {
+export default function FuentesExternas({ toast }) {
   const [accidentesExternos,  setAccidentesExternos]  = useState([]);
   const [ultimaSincronizacion,setUltimaSincronizacion]= useState(null);
   const [simulando,           setSimulando]           = useState(false);

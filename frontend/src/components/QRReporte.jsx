@@ -34,14 +34,13 @@ const TIPOS_QR = [
   },
 ];
 
-export default function QRReporte({ usuario, token, toast }) {
+export default function QRReporte({ toast }) {
   const [tipoSeleccionado, setTipoSeleccionado] = useState('reporte');
   const [urlBase, setUrlBase]   = useState(window.location.origin);
   const [urlCustom, setUrlCustom] = useState('');
   const [tamano, setTamano]     = useState(300);
-  const [colorFondo, setColorFondo]   = useState('ffffff');
+  const colorFondo = 'ffffff';
   const [colorFrente, setColorFrente] = useState('1f2937');
-  const [generado, setGenerado] = useState(false);
   const imgRef = useRef(null);
 
   const tipoActual = TIPOS_QR.find(t => t.id === tipoSeleccionado);
@@ -136,7 +135,7 @@ export default function QRReporte({ usuario, token, toast }) {
                     name="tipo"
                     value={tipo.id}
                     checked={tipoSeleccionado === tipo.id}
-                    onChange={() => { setTipoSeleccionado(tipo.id); setGenerado(false); }}
+                    onChange={() => { setTipoSeleccionado(tipo.id); }}
                     style={{ display: 'none' }}
                   />
                   <span style={{ fontSize: '1.3rem' }}>{tipo.icon}</span>
