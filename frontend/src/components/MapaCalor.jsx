@@ -107,7 +107,7 @@ const MapaCalor = () => {
   const [mesSeleccionado, setMesSeleccionado] = useState(null);
   const [tabStats, setTabStats] = useState('estadisticas');
   const [mostrarClusters, setMostrarClusters] = useState(false);
-  const [puntosNegros, setPuntosNegros] = useState([]);
+  const [, setPuntosNegros] = useState([]);
   const clusterLayersRef = useRef([]);
 
   const { toasts, removeToast, toast } = useToast();
@@ -132,25 +132,6 @@ const MapaCalor = () => {
     }
   }, []);
 
-  const seleccionarSugerencia = useCallback((sug) => {
-    const lat = parseFloat(parseFloat(sug.lat).toFixed(6));
-    const lng = parseFloat(parseFloat(sug.lon).toFixed(6));
-    setFormData((prev) => ({
-      ...prev,
-      latitud: lat,
-      longitud: lng,
-      barrio: sug.display_name,
-    }));
-    setBusquedaDireccion(sug.display_name.split(',')[0]);
-    setSugerenciasDireccion([]);
-
-    // Pan map to selected location and show a temporary marker
-    if (mapaRef.current) {
-      mapaRef.current.setView([lat, lng], 16);
-      colocarMarkerSeleccion([lat, lng]);
-    }
-  }, [colocarMarkerSeleccion]);
-
   // ─── Temporary selection marker ────────────────────────────────────────────
   const colocarMarkerSeleccion = useCallback((latlng) => {
     if (markerSeleccionRef.current) {
@@ -169,6 +150,25 @@ const MapaCalor = () => {
       .addTo(mapaRef.current)
       .openPopup();
   }, []);
+
+  const seleccionarSugerencia = useCallback((sug) => {
+    const lat = parseFloat(parseFloat(sug.lat).toFixed(6));
+    const lng = parseFloat(parseFloat(sug.lon).toFixed(6));
+    setFormData((prev) => ({
+      ...prev,
+      latitud: lat,
+      longitud: lng,
+      barrio: sug.display_name,
+    }));
+    setBusquedaDireccion(sug.display_name.split(',')[0]);
+    setSugerenciasDireccion([]);
+
+    // Pan map to selected location and show a temporary marker
+    if (mapaRef.current) {
+      mapaRef.current.setView([lat, lng], 16);
+      colocarMarkerSeleccion([lat, lng]);
+    }
+  }, [colocarMarkerSeleccion]);
 
   // ─── Map initialisation ────────────────────────────────────────────────────
   useEffect(() => {

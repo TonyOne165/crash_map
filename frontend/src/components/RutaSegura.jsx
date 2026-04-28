@@ -131,25 +131,6 @@ const RutaSegura = () => {
     }
   }, []);
 
-  const seleccionarSugerencia = useCallback((sug, tipo) => {
-    const lat = parseFloat(parseFloat(sug.lat).toFixed(6));
-    const lng = parseFloat(parseFloat(sug.lon).toFixed(6));
-    const nombre = sug.display_name.split(',')[0];
-    const punto = { lat, lng, nombre };
-
-    if (tipo === 'origen') {
-      setOrigen(punto);
-      setBusquedaOrigen(nombre);
-      setSugerenciasOrigen([]);
-      colocarMarcadorPunto(punto, 'origen', nombre);
-    } else {
-      setDestino(punto);
-      setBusquedaDestino(nombre);
-      setSugerenciasDestino([]);
-      colocarMarcadorPunto(punto, 'destino', nombre);
-    }
-  }, [colocarMarcadorPunto]);
-
   // ─── Marker helpers ────────────────────────────────────────────────────────
   const colocarMarcadorPunto = useCallback((punto, tipo, label) => {
     if (!mapaRef.current) return;
@@ -178,6 +159,25 @@ const RutaSegura = () => {
     markersRef.current.push({ marker, tipo });
     mapaRef.current.setView([punto.lat, punto.lng], 14, { animate: true });
   }, []);
+
+  const seleccionarSugerencia = useCallback((sug, tipo) => {
+    const lat = parseFloat(parseFloat(sug.lat).toFixed(6));
+    const lng = parseFloat(parseFloat(sug.lon).toFixed(6));
+    const nombre = sug.display_name.split(',')[0];
+    const punto = { lat, lng, nombre };
+
+    if (tipo === 'origen') {
+      setOrigen(punto);
+      setBusquedaOrigen(nombre);
+      setSugerenciasOrigen([]);
+      colocarMarcadorPunto(punto, 'origen', nombre);
+    } else {
+      setDestino(punto);
+      setBusquedaDestino(nombre);
+      setSugerenciasDestino([]);
+      colocarMarcadorPunto(punto, 'destino', nombre);
+    }
+  }, [colocarMarcadorPunto]);
 
   // ─── Quick point selection ─────────────────────────────────────────────────
   const seleccionarPuntoRapido = useCallback(
