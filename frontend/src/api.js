@@ -1,3 +1,5 @@
+console.log('REACT_APP_API_URL env var:', process.env.REACT_APP_API_URL);
+console.log('All env vars:', process.env);
 const API_BASE = process.env.REACT_APP_API_URL || 'http://localhost:8000';
 console.log('API_BASE:', API_BASE);
 const apiFetch = async (endpoint, options = {}) => {

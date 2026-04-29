@@ -23,7 +23,7 @@ echo " Python: $PYTHON_CMD"
 echo ""
 
 echo " Verificando dependencias..."
-$PYTHON_CMD -c "import fastapi, uvicorn, sqlalchemy, jose, passlib" &> /dev/null
+$PYTHON_CMD -c "import fastapi, uvicorn, sqlalchemy, jose, passlib, pandas" &> /dev/null
 
 if [ $? -ne 0 ]; then
     echo " [AVISO] Instalando dependencias..."
