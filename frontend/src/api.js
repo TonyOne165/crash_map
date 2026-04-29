@@ -1,5 +1,5 @@
 const API_BASE = process.env.REACT_APP_API_URL || 'http://localhost:8000';
-
+console.log('API_BASE:', API_BASE);
 const apiFetch = async (endpoint, options = {}) => {
   const token = localStorage.getItem('token');
   const headers = {
