@@ -23,7 +23,11 @@ const Login = ({ onLogin }) => {
 
       const endpoint = esRegistro ? '/api/registro' : '/api/login';
       const data = await api.post(endpoint, body);
-      onLogin(data);
+      if (data && !data.error && !data.offline) {
+        onLogin(data);
+      } else {
+        setError(data.error || 'El servidor no respondió correctamente');
+      }
     } catch (err) {
       setError(err.message || 'Error de conexión con el servidor');
     } finally {

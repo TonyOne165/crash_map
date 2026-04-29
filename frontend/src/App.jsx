@@ -12,34 +12,34 @@ import { useToast } from './hooks/useToast';
 import api from './api';
 
 // Lazy-load optional components that may not exist yet
-let ImportarDatos   = null;
+let ImportarDatos = null;
 let FuentesExternas = null;
-let ChatIA          = null;
-let PanelPublico    = null;
-let QRReporte       = null;
-let Geocercas       = null;
-try { ImportarDatos   = require('./components/ImportarDatos').default;   } catch {}
-try { FuentesExternas = require('./components/FuentesExternas').default; } catch {}
-try { ChatIA          = require('./components/ChatIA').default;          } catch {}
-try { PanelPublico    = require('./components/PanelPublico').default;    } catch {}
-try { QRReporte       = require('./components/QRReporte').default;       } catch {}
-try { Geocercas       = require('./components/Geocercas').default;       } catch {}
-let ReporteAccidente    = null;
-let GestorIncidentes    = null;
-let PanelTurno          = null;
-let AlertasZona         = null;
-let PuntosNegros        = null;
+let ChatIA = null;
+let PanelPublico = null;
+let QRReporte = null;
+let Geocercas = null;
+try { ImportarDatos = require('./components/ImportarDatos').default; } catch { }
+try { FuentesExternas = require('./components/FuentesExternas').default; } catch { }
+try { ChatIA = require('./components/ChatIA').default; } catch { }
+try { PanelPublico = require('./components/PanelPublico').default; } catch { }
+try { QRReporte = require('./components/QRReporte').default; } catch { }
+try { Geocercas = require('./components/Geocercas').default; } catch { }
+let ReporteAccidente = null;
+let GestorIncidentes = null;
+let PanelTurno = null;
+let AlertasZona = null;
+let PuntosNegros = null;
 let ComparativoInteranual = null;
-let CamarasPanel        = null;
-let PrediccionRiesgo    = null;
-try { ReporteAccidente    = require('./components/ReporteAccidente').default;    } catch {}
-try { GestorIncidentes    = require('./components/GestorIncidentes').default;    } catch {}
-try { PanelTurno          = require('./components/PanelTurno').default;          } catch {}
-try { AlertasZona         = require('./components/AlertasZona').default;         } catch {}
-try { PuntosNegros        = require('./components/PuntosNegros').default;        } catch {}
-try { ComparativoInteranual = require('./components/ComparativoInteranual').default; } catch {}
-try { CamarasPanel        = require('./components/CamarasPanel').default;        } catch {}
-try { PrediccionRiesgo    = require('./components/PrediccionRiesgo').default;    } catch {}
+let CamarasPanel = null;
+let PrediccionRiesgo = null;
+try { ReporteAccidente = require('./components/ReporteAccidente').default; } catch { }
+try { GestorIncidentes = require('./components/GestorIncidentes').default; } catch { }
+try { PanelTurno = require('./components/PanelTurno').default; } catch { }
+try { AlertasZona = require('./components/AlertasZona').default; } catch { }
+try { PuntosNegros = require('./components/PuntosNegros').default; } catch { }
+try { ComparativoInteranual = require('./components/ComparativoInteranual').default; } catch { }
+try { CamarasPanel = require('./components/CamarasPanel').default; } catch { }
+try { PrediccionRiesgo = require('./components/PrediccionRiesgo').default; } catch { }
 
 // ─── Placeholder for missing admin components ────────────────────────────────
 function Placeholder({ nombre }) {
@@ -55,38 +55,38 @@ function Placeholder({ nombre }) {
 // ─── Navigation items definition ────────────────────────────────────────────
 const NAV_ITEMS = [
   // General (todos los usuarios autenticados)
-  { id: 'mapa',        label: 'Mapa de Calor',       icon: '🔥', adminOnly: false },
-  { id: 'ruta',        label: 'Ruta Segura',         icon: '🗺️', adminOnly: false },
-  { id: 'chat',        label: 'Asistente IA',        icon: '🤖', adminOnly: false },
-  { id: 'publico',     label: 'Panel Público',       icon: '📢', adminOnly: false },
-  { id: 'reportar',    label: 'Reportar Accidente',  icon: '📝', adminOnly: false, userOnly: true },
+  { id: 'mapa', label: 'Mapa de Calor', icon: '🔥', adminOnly: false },
+  { id: 'ruta', label: 'Ruta Segura', icon: '🗺️', adminOnly: false },
+  { id: 'chat', label: 'Asistente IA', icon: '🤖', adminOnly: false },
+  { id: 'publico', label: 'Panel Público', icon: '📢', adminOnly: false },
+  { id: 'reportar', label: 'Reportar Accidente', icon: '📝', adminOnly: false, userOnly: true },
   // Operaciones (admin)
-  { id: 'dashboard',   label: 'Dashboard',           icon: '🏠', adminOnly: true  },
-  { id: 'incidentes',  label: 'Gestión Incidentes',  icon: '🚨', adminOnly: true  },
-  { id: 'turno',       label: 'Panel de Turno',      icon: '📺', adminOnly: true  },
-  { id: 'alertas',     label: 'Alertas por Zona',    icon: '⚡', adminOnly: true  },
+  { id: 'dashboard', label: 'Dashboard', icon: '🏠', adminOnly: true },
+  { id: 'incidentes', label: 'Gestión Incidentes', icon: '🚨', adminOnly: true },
+  { id: 'turno', label: 'Panel de Turno', icon: '📺', adminOnly: true },
+  { id: 'alertas', label: 'Alertas por Zona', icon: '⚡', adminOnly: true },
   // Análisis (admin)
-  { id: 'puntos',      label: 'Puntos Negros',       icon: '🔴', adminOnly: true  },
-  { id: 'comparativo', label: 'Comparativo Anual',   icon: '📊', adminOnly: true  },
-  { id: 'prediccion',  label: 'Predicción Riesgo',   icon: '🔮', adminOnly: true  },
+  { id: 'puntos', label: 'Puntos Negros', icon: '🔴', adminOnly: true },
+  { id: 'comparativo', label: 'Comparativo Anual', icon: '📊', adminOnly: true },
+  { id: 'prediccion', label: 'Predicción Riesgo', icon: '🔮', adminOnly: true },
   // Configuración (admin)
-  { id: 'camaras',     label: 'Cámaras',             icon: '📹', adminOnly: true  },
-  { id: 'importar',    label: 'Importar Datos',      icon: '⬆', adminOnly: true  },
-  { id: 'fuentes',     label: 'Fuentes Externas',    icon: '📡', adminOnly: true  },
-  { id: 'geocercas',   label: 'Geocercas',           icon: '🔶', adminOnly: true  },
-  { id: 'qr',          label: 'Códigos QR',          icon: '📱', adminOnly: true  },
+  { id: 'camaras', label: 'Cámaras', icon: '📹', adminOnly: true },
+  { id: 'importar', label: 'Importar Datos', icon: '⬆', adminOnly: true },
+  { id: 'fuentes', label: 'Fuentes Externas', icon: '📡', adminOnly: true },
+  { id: 'geocercas', label: 'Geocercas', icon: '🔶', adminOnly: true },
+  { id: 'qr', label: 'Códigos QR', icon: '📱', adminOnly: true },
 ];
 
 // ─── Time-ago helper ─────────────────────────────────────────────────────────
 function timeAgo(dateStr) {
-  const now    = new Date();
-  const then   = new Date(dateStr);
+  const now = new Date();
+  const then = new Date(dateStr);
   const diffMs = now - then;
   const diffMin = Math.floor(diffMs / 60000);
-  if (diffMin < 1)  return 'ahora mismo';
+  if (diffMin < 1) return 'ahora mismo';
   if (diffMin < 60) return `hace ${diffMin} min`;
   const diffH = Math.floor(diffMin / 60);
-  if (diffH < 24)   return `hace ${diffH} h`;
+  if (diffH < 24) return `hace ${diffH} h`;
   const diffD = Math.floor(diffH / 24);
   return `hace ${diffD} d`;
 }
@@ -94,19 +94,19 @@ function timeAgo(dateStr) {
 // ─── Notification helpers ────────────────────────────────────────────────────
 function notifDotColor(tipo) {
   switch (tipo) {
-    case 'error':   return 'var(--danger)';
+    case 'error': return 'var(--danger)';
     case 'warning': return 'var(--warning)';
     case 'success': return 'var(--success)';
-    default:        return 'var(--accent)';
+    default: return 'var(--accent)';
   }
 }
 
 function notifEmoji(tipo) {
   switch (tipo) {
-    case 'error':   return '🔴';
+    case 'error': return '🔴';
     case 'warning': return '🟡';
     case 'success': return '🟢';
-    default:        return '🔵';
+    default: return '🔵';
   }
 }
 
@@ -114,23 +114,23 @@ function notifEmoji(tipo) {
 //  Main App
 // ════════════════════════════════════════════════════════════════════════════
 export default function App() {
-  const [usuario,        setUsuario]        = useState(null);
-  const [token,          setToken]          = useState(null);
-  const [vistaActiva,    setVistaActiva]    = useState('mapa');
+  const [usuario, setUsuario] = useState(null);
+  const [token, setToken] = useState(null);
+  const [vistaActiva, setVistaActiva] = useState('mapa');
   const [notificaciones, setNotificaciones] = useState([]);
-  const [notifNoLeidas,  setNotifNoLeidas]  = useState(0);
-  const [mostrarNotif,   setMostrarNotif]   = useState(false);
-  const [mostrarPerfil,  setMostrarPerfil]  = useState(false);
+  const [notifNoLeidas, setNotifNoLeidas] = useState(0);
+  const [mostrarNotif, setMostrarNotif] = useState(false);
+  const [mostrarPerfil, setMostrarPerfil] = useState(false);
 
   const { toasts, toast, removeToast } = useToast();
-  const notifRef     = useRef(null);
+  const notifRef = useRef(null);
   const pollInterval = useRef(null);
-  const wsRef        = useRef(null);
+  const wsRef = useRef(null);
 
   // ── Restore auth from localStorage ────────────────────────────────────────
   useEffect(() => {
     const storedToken = localStorage.getItem('token');
-    const storedUser  = localStorage.getItem('usuario');
+    const storedUser = localStorage.getItem('usuario');
     if (storedToken && storedUser) {
       try {
         const parsed = JSON.parse(storedUser);
@@ -189,10 +189,10 @@ export default function App() {
             toast.success('Reporte ciudadano aprobado');
             fetchNotificaciones();
           }
-        } catch {}
+        } catch { }
       };
-      ws.onerror = () => {}; // silent — WS may not be available
-    } catch {}
+      ws.onerror = () => { }; // silent — WS may not be available
+    } catch { }
 
     return () => {
       clearInterval(pollInterval.current);
@@ -265,8 +265,8 @@ export default function App() {
 
   // ── Visible nav items (filter by role) ────────────────────────────────────
   const navVisibles = NAV_ITEMS.filter(item => {
-    if (item.adminOnly && !(usuario && usuario.es_admin)) return false;
-    if (item.userOnly  &&  (usuario && usuario.es_admin)) return false;
+    if (item.adminOnly && !usuario?.es_admin) return false;
+    if (item.userOnly && (usuario && usuario.es_admin)) return false;
     return true;
   });
 
@@ -355,8 +355,8 @@ export default function App() {
   }
 
   const userInitial = (usuario.username || 'U')[0].toUpperCase();
-  const userRole    = usuario.es_admin ? 'Admin' : 'Usuario';
-  const activeItem  = navVisibles.find(n => n.id === vistaActiva);
+  const userRole = usuario.es_admin ? 'Admin' : 'Usuario';
+  const activeItem = navVisibles.find(n => n.id === vistaActiva);
 
   return (
     <div className="app-layout">
