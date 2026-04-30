@@ -410,7 +410,12 @@ app = FastAPI(title="API Accidentalidad Cartagena", version="3.0.0")
 security = HTTPBearer()
 
 # Construir lista de orígenes CORS dinámicamente
-_cors_origins = ["http://localhost:3000", "http://127.0.0.1:3000"]
+_cors_origins = [
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
+    "https://crash-map-4dmg.vercel.app",  # Tu dominio principal
+    "https://crash-map-4dmg-tonyone165-8767s-projects.vercel.app" # Por si usas los de preview
+]
 _frontend_url = os.getenv("FRONTEND_URL", "")
 if _frontend_url:
     _cors_origins.append(_frontend_url)
