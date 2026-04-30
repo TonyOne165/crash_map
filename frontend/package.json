@@ -1,6 +1,7 @@
 {
   "name": "accidentalidad-cartagena-frontend",
   "version": "1.0.0",
+  "homepage": "/",
   "description": "Sistema de Análisis de Accidentalidad - Cartagena",
   "main": "index.js",
   "scripts": {
