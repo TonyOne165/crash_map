@@ -24,11 +24,13 @@ root.render(
   </React.StrictMode>
 );
 
-// Register service worker for PWA support
+/* 
+// Comenta esto temporalmente para que el login sea siempre real
 if ('serviceWorker' in navigator && process.env.NODE_ENV === 'production') {
   window.addEventListener('load', () => {
     navigator.serviceWorker
       .register('/service-worker.js')
-      .catch(() => {}); // silently ignore if SW not available
+      .catch(() => {});
   });
 }
+*/
